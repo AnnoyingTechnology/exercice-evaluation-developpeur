@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FAQ-O'clock{% endblock %}
+
+{% block body %}
+    
+
+<div class="container">
+   <div class="container questions">
+       
+            
+               <ol> {% for question in questions %}
+                    <li> 
+               <a href="{{ path('question_show', {'id': question.id}) }}"> <h5>{{ question.title }}</h5> </a>
+                <p>{{ question.body }}</p>
+                    </li>
+              
+                   
+                    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
+             
+        {% else %}
+           
+               <p>no records found </p> 
+            
+        {% endfor %}
+         </ol>  
+      </div>
+
+    <a href="{{ path('question_new') }}">Create new</a>
+    </div>
+{% endblock %}

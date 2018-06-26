@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Question{% endblock %}
+
+
+{% block body %}
+ {# {{ dump(question.answers) }}  #}
+<div class="container">
+
+   <div>
+       
+   
+    <h2>Question : {{ question.title }} </h2>  {% for tag in question.tags %}  <a href="#" class="badge badge-warning">{{ tag.name }}</a>
+<a href="#" class="badge badge-danger"></a>
+{% endfor %}
+    </div>
+    <p>{{ question.body }}</p>
+    <h3>Réponses</h3>
+    <hr>
+      
+   
+        {% if answer.isPreferred %}
+        <div class="container preferred">
+            <p>Réponse préférée!</p>
+        <p>{{answer.body}}</p> <small> par {{answer.author.username}} le {{answer.createdAt|date('d-M-Y à h:m:s')}}</small>
+     </div>
+    <hr>    
+    {% endif %}
+
+     <div class="container {{cycle(['answers-odd', 'answers-even'], loop.index0)}}">
+        <p>{{answer.body}}</p> <small> par {{answer.author.username}} le {{answer.createdAt|date('d-M-Y à h:m:s')}}</small>    
+    </div>
+    <hr>
+     {# {% endfor %} #}
+
+    {% if is_granted('ROLE_USER') %}
+   
+    <h4>Saisissez votre réponse</h4>
+
+
+   <form action="answer/new" method="post">
+   
+   <input type="textarea" name="a-body">
+
+   </form>
+
+
+    </div>
+{% endif %}
+    {# <a href="{{ path('question_index') }}">back to list</a> #}
+    {% if  app.user == question.author  %}
+    <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
+    {% endif %}
+{% if  app.user == question.author  or is_granted('ROLE_ADMINISTRATOR') %}
+    {{ include('question/_delete_form.html.twig') }}
+     {% endif %}
+{% endblock %}

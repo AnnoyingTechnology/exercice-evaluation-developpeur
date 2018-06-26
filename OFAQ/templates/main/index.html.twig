@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container ">
+<h2>Les dernières questions</h2> 
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <a href="{{ path('question_new') }}">Nouvelle Question</a>
+    {% endif %}
+   <div class="container questions">
+   
+       {% for question in questions %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ question.title }}</h5>
+                     <h6 class="card-subtitle mb-2 text-muted"> par {{question.author.username}} le {{question.createdAt|date('d-M-Y à h:m:s')}}</h6>
+                    <p class="card-text">{{ question.body }}</p>
+                    <a href="{{ path('question_show', {'id': question.id}) }}" class="card-link">Voir</a>
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') and question.author == app.user %}
+                    <a href="{{ path('question_edit', {'id': question.id}) }}" class="card-link">Editer</a>
+                    {% endif %}
+                </div>
+             </div>
+                           
+                    
+             
+        {% else %}
+           
+               <p>no records found </p> 
+            
+        {% endfor %}
+      </div>
+    
+    </div>
+
+{% endblock %}

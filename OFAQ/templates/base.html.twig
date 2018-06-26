@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}FAQ O'clock{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/app.css')}}">
+
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <header>
+            
+              <h1>FAQ-O'clock</h1>
+            
+
+            <nav class="nav ">
+
+                <a class="nav-item nav-link" href="{{ path('home') }}"> <i class="fas fa-home"> Accueil </i> </a>  
+                <a class="nav-item nav-link" href="{{ path('cgu') }}"> <i class="fas fa-book "> Charte</i> </a>  
+
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {# User connecté #}
+              <div> Bonjour,   <span class="badge badge-primary "> {{ app.user.username }}</span>
+                <span class="badge badge-danger"> {{ app.user.role.label }}</span> </div>
+                 <a class="nav-item nav-link" href="{{ path('user_show', {'id': app.user.id}) }}"><i class="fas fa-user-circle"> Mon profil</i></a>
+                <a class="nav-item nav-link" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"> Déconnexion</i></a>
+                {% else %}
+                {# User non connecté #}
+                <span class="badge badge-primary status">Visiteur</span>
+                <a class="nav-item nav-link" href="{{ path('login') }}"> <i class="fas fa-sign-in-alt"> Connexion </i></a>
+                <a class="nav-item nav-link" href="{{ path('user_new') }}"> <i class="fas fa-user-plus"> Inscription </i></a>
+                {% endif %}
+
+            </nav>
+
+            {% block nav %}{% endblock %}
+        </header>
+        {% block body %}{% endblock %}
+
+        
+        {% block javascripts %}
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        {% endblock %}
+    </body>
+</html>
