@@ -8,6 +8,14 @@
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <a href="{{ path('question_new') }}">Nouvelle Question</a>
     {% endif %}
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    {% endfor %}
    <div class="container questions">
    
        {% for question in questions %}
@@ -20,6 +28,12 @@
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') and question.author == app.user or  is_granted('ROLE_MODERATOR')%}
                     <a href="{{ path('question_edit', {'id': question.id}) }}" class="card-link">Editer</a>
+                    {% endif %}
+
+                    {% if is_granted('ROLE_MODERATOR') %}
+                    <form action="/backend/question/{{question.id}}/unallowed" method="post">
+                    <button type="submit" class= "btn btn-dark float-right">Bloquer</button>
+                    </form>
                     {% endif %}
                 </div>
              </div>

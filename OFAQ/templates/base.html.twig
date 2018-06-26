@@ -23,7 +23,7 @@
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {# User connecté #}
-              <div> Bonjour,   <span class="badge badge-primary "> {{ app.user.username }}</span>
+              <div id= "bonjour"> Bonjour,   <span class="badge badge-primary "> {{ app.user.username }}</span>
                         {% if is_granted('ROLE_ADMIN') %}
                  <a href="{{path('admin_home')}}" class="badge badge-danger"> Page {{ app.user.role.label }} </a>
                          {% else %}
@@ -35,7 +35,7 @@
                 <a class="nav-item nav-link" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"> Déconnexion</i></a>
                 {% else %}
                 {# User non connecté #}
-                <span class="badge badge-primary status">Visiteur</span>
+                <span class="badge badge-primary status visitor">Visiteur</span>
                 <a class="nav-item nav-link" href="{{ path('login') }}"> <i class="fas fa-sign-in-alt"> Connexion </i></a>
                 <a class="nav-item nav-link" href="{{ path('user_new') }}"> <i class="fas fa-user-plus"> Inscription </i></a>
                 {% endif %}

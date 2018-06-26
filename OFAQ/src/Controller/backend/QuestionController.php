@@ -81,4 +81,20 @@ class QuestionController extends Controller
 
         return $this->redirectToRoute('question_index');
     }
+    /**
+     * @Route("/{id}/unallowed", name="question_unallowed", methods="POST")
+     */
+    //fonction pour modérer les questions
+    public function unallow(Question $question) {
+
+        $this->denyAccessUnlessGranted('ROLE_MODERATOR', null, 'Impossible d\'accéder à cette page!');
+
+        $question->setIsAllowed(false);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $this->addFlash('dark', 'La question a été modérée');
+
+        return $this->redirectToRoute('home');
+
+    }
 }

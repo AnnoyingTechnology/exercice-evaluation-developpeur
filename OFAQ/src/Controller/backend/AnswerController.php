@@ -25,7 +25,7 @@ class AnswerController extends Controller
     }
 
     /**
-     * @Route("question/{id}/new", name="answer_new", methods="POST")
+     * @Route("/new/{id}", name="answer_new", methods="POST")
      */
     public function new(Request $request, Question $question): Response
     {
@@ -89,5 +89,37 @@ class AnswerController extends Controller
         }
 
         return $this->redirectToRoute('answer_index');
+    }
+
+    //fonction permettant de rendre la réponse préférée
+
+    /**
+     * @Route("/{id}/preferred", name="answer_preferred", methods="POST")
+     */
+
+     public function setPreferred(Answer $answer) 
+     {
+        $answer->setIsPreferred(true);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+
+        return $this->redirectToRoute('question_show', ['id'=> $answer->getQuestion()->getId()]);
+     }
+
+     /**
+     * @Route("/{id}/unallowed", name="answer_preferred", methods="POST")
+     */
+    //fonction pour modérer les réponses
+    public function unallow(Answer $answer) {
+
+        $this->denyAccessUnlessGranted('ROLE_MODERATOR', null, 'Impossible d\'accéder à cette page!');
+
+        $answer->setIsAllowed(false);
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $this->addFlash('dark', 'La réponse a été modérée');
+
+        return $this->redirectToRoute('question_show', ['id'=> $answer->getQuestion()->getId()]);
+
     }
 }

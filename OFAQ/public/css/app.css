@@ -13,21 +13,35 @@ header h1 {
     font-weight: bold;
 }
 
-header nav div {
+#bonjour {
+    position: relative;
+    top: 0.5rem;
     display: flex;
     height: fit-content;
 }
 
-header nav div span {
+#bonjour span {
     margin-left: 1rem;
     
+    top: 0.25rem;
+    position: relative;
 }
-
+.wrapper {
+    text-align: center;
+    padding-top: 1rem;
+}
 .login h2 {
     text-align: center;
     margin: 1rem 0 2rem;
 }
 
+.visitor {
+    padding-top: 0.3rem;
+    height: fit-content;
+    position: relative;
+    top: 0.6rem;
+
+}
 .login label{
     margin-left: 2rem; 
 }
@@ -41,6 +55,8 @@ header nav a {
     color: #fffdd8;
 }
 
+
+
 .questions{
     border: 2px solid olivedrab;
     background-color: #3d6a7b;
@@ -52,6 +68,10 @@ header nav a {
 }
 .card {
     margin-top: 1rem;
+}
+.card button {
+    position: relative;
+    bottom: 2em;
 }
 
 .login {
@@ -70,4 +90,13 @@ header nav a {
 .preferred {
     border: 3px solid rebeccapurple;
     background-color: #e4d393eb;
+}
+
+.answer-body {
+    width: 25rem;
+    height: 5rem;
+}
+.answer-submit {
+    position: relative;
+    top: 1.5rem;
 }
