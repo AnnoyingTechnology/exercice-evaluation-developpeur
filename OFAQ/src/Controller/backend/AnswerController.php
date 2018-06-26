@@ -3,6 +3,7 @@
 namespace App\Controller\backend;
 
 use App\Entity\Answer;
+use App\Entity\Question;
 use App\Form\AnswerType;
 use App\Repository\AnswerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,9 +25,9 @@ class AnswerController extends Controller
     }
 
     /**
-     * @Route("/new", name="answer_new", methods="GET|POST")
+     * @Route("question/{id}/new", name="answer_new", methods="POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Question $question): Response
     {
             $answer = new Answer();
          
@@ -34,7 +35,7 @@ class AnswerController extends Controller
             if(!empty($body)  ){
                 $answer->setBody($body);
             }
-
+            $answer->setQuestion($question);
             $answer->setCreatedAt(new \DateTime);
             $answer->setAuthor($this->getUser());
          
@@ -42,7 +43,7 @@ class AnswerController extends Controller
             $em->persist($answer);
             $em->flush();
 
-            return $this->redirectToRoute('question_show');
+            return $this->redirectToRoute('question_show',['id'=> $question->getId()]);
         
 
       

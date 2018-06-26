@@ -17,13 +17,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserController extends Controller
 {
-    /**
-     * @Route("/", name="user_index", methods="GET")
-     */
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('user/index.html.twig', ['users' => $userRepository->findAll()]);
-    }
+    
 
     /**
      * @Route("/new", name="user_new", methods="GET|POST")
@@ -57,6 +51,8 @@ class UserController extends Controller
      */
     public function show(User $user): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Impossible d\'accéder à cette  page!');
+
         return $this->render('user/show.html.twig', ['user' => $user]);
     }
 
@@ -65,6 +61,8 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER', null,  'Impossible d\'accéder à cette  page!');
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -85,6 +83,8 @@ class UserController extends Controller
      */
     public function delete(Request $request, User $user): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Impossible d\'accéder à cette  page!');
+
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
@@ -97,7 +97,10 @@ class UserController extends Controller
     /**
      * @Route("/{id}/questions", name="user_questions", methods="GET")
      */
-    public function userQuestions(User $user) {
+    public function userQuestions(User $user) 
+    {   
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Impossible d\'accéder à cette  page!');
+
         $questions= $user->getQuestions();
         return $this->render('question/index.html.twig',[
             'questions' => $questions,
@@ -108,7 +111,10 @@ class UserController extends Controller
      /**
      * @Route("/{id}/answers", name="user_answers", methods="GET")
      */
-    public function userAnswers(User $user) {
+    public function userAnswers(User $user) 
+    {   
+        $this->denyAccessUnlessGranted('ROLE_USER', null, 'Impossible d\'accéder à cette  page!');
+
         $answers= $user->getAnswers();
         return $this->render('answer/index.html.twig',[
             'answers' => $answers,

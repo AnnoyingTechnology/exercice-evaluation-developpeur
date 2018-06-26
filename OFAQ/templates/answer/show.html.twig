@@ -12,11 +12,15 @@
                 <td>{{ answer.id }}</td>
             </tr>
             <tr>
-                <th>Body</th>
+                <th>Auteur</th>
+                <td>{{ answer.author.username }}</td>
+            </tr>
+            <tr>
+                <th>Texte</th>
                 <td>{{ answer.body }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Date de création</th>
                 <td>{{ answer.createdAt ? answer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>

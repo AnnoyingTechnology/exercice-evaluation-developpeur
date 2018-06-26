@@ -49,10 +49,16 @@ class Question
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAllowed;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->isAllowed = true;
     }
 
     public function getId()
@@ -161,6 +167,18 @@ class Question
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getIsAllowed(): ?bool
+    {
+        return $this->isAllowed;
+    }
+
+    public function setIsAllowed(bool $isAllowed): self
+    {
+        $this->isAllowed = $isAllowed;
 
         return $this;
     }

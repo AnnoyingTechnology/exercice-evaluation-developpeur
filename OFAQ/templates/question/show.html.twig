@@ -17,11 +17,13 @@
     <p>{{ question.body }}</p>
     <h3>Réponses</h3>
     <hr>
+      {% for answer in answers %}
+          
       
    
         {% if answer.isPreferred %}
         <div class="container preferred">
-            <p>Réponse préférée!</p>
+            <strong>Réponse préférée!</strong>
         <p>{{answer.body}}</p> <small> par {{answer.author.username}} le {{answer.createdAt|date('d-M-Y à h:m:s')}}</small>
      </div>
     <hr>    
@@ -31,7 +33,7 @@
         <p>{{answer.body}}</p> <small> par {{answer.author.username}} le {{answer.createdAt|date('d-M-Y à h:m:s')}}</small>    
     </div>
     <hr>
-     {# {% endfor %} #}
+     {% endfor %}
 
     {% if is_granted('ROLE_USER') %}
    

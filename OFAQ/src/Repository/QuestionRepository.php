@@ -20,12 +20,13 @@ class QuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Question::class);
     }
 
-    // On crée une requête  pour récupérer les questions triées par date (les plus récentes d'abord) 
+    // On crée une requête  pour récupérer les questions autorisées triées par date (les plus récentes d'abord) 
     public function sortQuestionsByDate(){
         return $this->getEntityManager()
             ->createQuery('
                 SELECT q 
                 FROM App\Entity\Question q 
+                WHERE q.isAllowed = true
                 ORDER BY q.createdAt DESC
             ')
             ->getResult();

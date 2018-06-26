@@ -28,11 +28,11 @@ class MainController extends Controller
      /**
      * @Route("/question/{id}", name="question_show", methods="GET", requirements= {"id": "\d+"} )
      */
-    public function show(Question $question,  Request $request)
+    public function show(Question $question,  Request $request, AnswerRepository $repo)
     {
-        
-        $answers = $question->getAnswers();
-        dump($answers);
+        //On utilise la méthode personnalisée pour récupérer les réponses d'une question aec la préférée en premier
+        $answers = $repo->findAnsByQuestion($question);
+      
        
         return $this->render('question/show.html.twig', [
             'question' => $question,

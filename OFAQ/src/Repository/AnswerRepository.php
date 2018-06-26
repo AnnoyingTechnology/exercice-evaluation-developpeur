@@ -20,19 +20,21 @@ class AnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, Answer::class);
     }
 
-    //On crée un requête personnnalisée permettant de récupérer les réponses d'une question et de mettre la préférée en premier
-   /* public function findAnsByQuestion(Question $question) {
+    //On crée un requête personnnalisée permettant de récupérer les réponses autorisées d'une question et de mettre la préférée en premier 
+    public function findAnsByQuestion(Question $question) {
 
         return $this->getEntityManager()
         ->createQuery('
             SELECT a 
             FROM App\Entity\Answer a
             WHERE a.question = :question
+            AND a.isAllowed = true
             ORDER BY a.isPreferred DESC
         ')
         ->setParameter('question', $question)
         ->getResult();
     }
+
 
 
 //    /**

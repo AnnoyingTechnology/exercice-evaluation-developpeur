@@ -20,8 +20,11 @@ class Answer
      * @ORM\Column(type="text")
      */
     private $body;
-
-    
+/**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="answers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $question;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="answers")
@@ -39,9 +42,15 @@ class Answer
      */
     private $isPreferred;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAllowed;
+
     public function __construct(){
 
         $this->isPreferred = false;
+        $this->isAllowed = true;
     }
 
 
@@ -107,6 +116,18 @@ class Answer
     public function setIsPreferred(?bool $isPreferred): self
     {
         $this->isPreferred = $isPreferred;
+
+        return $this;
+    }
+
+    public function getIsAllowed(): ?bool
+    {
+        return $this->isAllowed;
+    }
+
+    public function setIsAllowed(bool $isAllowed): self
+    {
+        $this->isAllowed = $isAllowed;
 
         return $this;
     }
