@@ -23,6 +23,10 @@ class Question
      */
     private $title;
 
+    public function __toString(){
+        return $this->title;
+    }
+
     /**
      * @ORM\Column(type="text")
      */

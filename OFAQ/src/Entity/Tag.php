@@ -23,6 +23,10 @@ class Tag
      */
     private $name;
 
+    public function __toString(){
+        return $this->name;
+    }
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Question", mappedBy="tags")
      */

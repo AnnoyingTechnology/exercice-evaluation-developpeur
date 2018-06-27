@@ -16,13 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AnswerController extends Controller
 {
-    /**
-     * @Route("/", name="answer_index", methods="GET")
-     */
-    public function index(AnswerRepository $answerRepository): Response
-    {
-        return $this->render('answer/index.html.twig', ['answers' => $answerRepository->findAll()]);
-    }
+    
 
     /**
      * @Route("/new/{id}", name="answer_new", methods="POST")
@@ -32,9 +26,13 @@ class AnswerController extends Controller
             $answer = new Answer();
          
             $body= $request->request->get('a-body');
-            if(!empty($body)  ){
+            if(empty($body) ){
+                $this-> addFlash('danger', 'Ce champ ne peut pas être vide!');
+                return $this->redirectToRoute('question_show',['id'=> $question->getId()]);
+            } else {
                 $answer->setBody($body);
             }
+    
             $answer->setQuestion($question);
             $answer->setCreatedAt(new \DateTime);
             $answer->setAuthor($this->getUser());
@@ -69,7 +67,10 @@ class AnswerController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('answer_edit', ['id' => $answer->getId()]);
+        }else {
+            $this-> addFlash('danger', 'Votre formulaire contient des erreurs!');
         }
+
 
         return $this->render('answer/edit.html.twig', [
             'answer' => $answer,

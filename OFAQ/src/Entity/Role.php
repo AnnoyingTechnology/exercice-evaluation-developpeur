@@ -23,10 +23,17 @@ class Role
      */
     private $name;
 
+
+
     /**
      * @ORM\Column(type="string", length=64)
      */
     private $label;
+
+    public function __toString(){
+
+        return $this->label;
+    }
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="role")

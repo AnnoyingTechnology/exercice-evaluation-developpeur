@@ -25,6 +25,7 @@ header h1 {
     
     top: 0.25rem;
     position: relative;
+    height: fit-content;
 }
 .wrapper {
     text-align: center;
@@ -70,8 +71,7 @@ header nav a {
     margin-top: 1rem;
 }
 .card button {
-    position: relative;
-    bottom: 2em;
+    margin-left: 1rem;
 }
 
 .login {
@@ -96,7 +96,15 @@ header nav a {
     width: 25rem;
     height: 5rem;
 }
-.answer-submit {
+/*.answer-submit {
     position: relative;
     top: 1.5rem;
+}*/
+
+footer {
+    text-align: center;
+}
+
+form {
+    display: inline-flex;
 }

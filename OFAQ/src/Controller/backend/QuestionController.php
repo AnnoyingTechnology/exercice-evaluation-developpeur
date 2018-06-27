@@ -15,13 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class QuestionController extends Controller
 {
-    /**
-     * @Route("/all", name="question_index", methods="GET")
-     */
-    public function index(QuestionRepository $questionRepository): Response
-    {
-        return $this->render('question/index.html.twig', ['questions' => $questionRepository->findAll()]);
-    }
+    
 
     /**
      * @Route("/new", name="question_new", methods="GET|POST")
@@ -33,11 +27,13 @@ class QuestionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $question->setAuthor($this->getUser());
+            $question->setCreatedAt(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $em->flush();
 
-            return $this->redirectToRoute('question_index');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('question/new.html.twig', [
@@ -58,9 +54,11 @@ class QuestionController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this-> addFlash('success', 'Votre question a été modifiée!');
 
-            return $this->redirectToRoute('question_edit', ['id' => $question->getId()]);
+            return $this->redirectToRoute('home');
         }
+
 
         return $this->render('question/edit.html.twig', [
             'question' => $question,

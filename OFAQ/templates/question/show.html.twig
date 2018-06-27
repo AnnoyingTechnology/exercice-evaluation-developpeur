@@ -12,8 +12,8 @@
    <div>
        
    
-    <h2>Question : {{ question.title }} </h2>  {% for tag in question.tags %}  <a href="#" class="badge badge-warning">{{ tag.name }}</a>
-<a href="#" class="badge badge-danger"></a>
+    <h2>Question : {{ question.title }} </h2>  {% for tag in question.tags %}  <a href="{{ path('tag_questions', {'id':tag.id})}}" class="badge badge-warning">{{ tag.name }}</a>
+
 {% endfor %}
     </div>
     <p>{{ question.body }}</p>
@@ -40,7 +40,7 @@
            
     
 
-     <div class="container answer{{cycle(['answers-odd', 'answers-even'], loop.index0)}}">
+     <div class="container answer {{cycle(['answers-odd', 'answers-even'], loop.index0)}}">
         <p>{{answer.body}}</p> <small> par {{answer.author.username}} le {{answer.createdAt|date('d-M-Y à h:m:s')}}</small>  
           
         {% if app.user == question.author %} {# On affiche le formulaire uniquement si l'utilisateur est l'auteur de la question#}

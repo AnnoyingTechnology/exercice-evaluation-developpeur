@@ -1,4 +1,24 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+{% if is_granted('ROLE_ADMIN') %}
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+    {# {{ form_widget(form) }} #}
+    {{ form_row(form.username) }}
+    {{ form_row(form.password) }}
+    {{ form_row(form.email) }}
+
+    
+    {{ form_row(form.role) }}
+    
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+{% else %}
+    
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+    {# {{ form_widget(form) }} #}
+    {{ form_row(form.username) }}
+    {{ form_row(form.password) }}
+    {{ form_row(form.email) }}    
+   
+    {{ form_row(form.role,{'attr': {'hidden': 'true'}} ) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+{% endif %}

@@ -14,7 +14,7 @@ class QuestionType extends AbstractType
         $builder
             ->add('title')
             ->add('body')
-            ->add('author')
+            
             ->add('tags')
         ;
     }

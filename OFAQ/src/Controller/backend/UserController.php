@@ -36,7 +36,7 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
+            $this->addFlash('success', 'compte utilisateur créé!');
             return $this->redirectToRoute('home');
         }
 
@@ -59,18 +59,35 @@ class UserController extends Controller
     /**
      * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null,  'Impossible d\'accéder à cette  page!');
+
+       /* // On stocke le mot de passe courant (celui en base)
+        $currentPassword = $user->getPassword();
+        // Et on le passe à vide...
+        $user->setPassword('');*/
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             // On compare le nouveau (form) et l'ancien (current)
+             /*if(empty($user->getPassword())) {
+                // On remets l'ancien
+                $user->setPassword($currentPassword);
+                } else {*/
+                $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+                   // }
+
             $this->getDoctrine()->getManager()->flush();
+            $this->addFlash('success', 'compte utilisateur modifié!');
 
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
-        }
+        } /*else {
+            $this->addFlash('danger', 'Erreur!');
+            return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+             }*/
 
         return $this->render('user/edit.html.twig', [
             'user' => $user,
@@ -83,7 +100,7 @@ class UserController extends Controller
      */
     public function delete(Request $request, User $user): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Impossible d\'accéder à cette  page!');
+        /*$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Impossible d\'accéder à cette  page!');*/
 
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
@@ -91,7 +108,7 @@ class UserController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('user_index');
+        return $this->redirectToRoute('home');
     }
 
     /**

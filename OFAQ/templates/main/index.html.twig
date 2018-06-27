@@ -22,6 +22,10 @@
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ question.title }}</h5>
+                    <div class = "tags">
+                    {% for tag in question.tags %}  <a href="{{path('tag_questions', {'id': tag.id}) }}" class="badge badge-warning">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
                      <h6 class="card-subtitle mb-2 text-muted"> par {{question.author.username}} le {{question.createdAt|date('d-M-Y à h:m:s')}}</h6>
                     <p class="card-text">{{ question.body }}</p>
                     <a href="{{ path('question_show', {'id': question.id}) }}" class="card-link">Voir</a>

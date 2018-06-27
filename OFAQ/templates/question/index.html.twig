@@ -5,19 +5,21 @@
 {% block body %}
     
 
-<div class="container">
+
    <div class="container questions">
        
             
                <ol> {% for question in questions %}
-                    <li> 
-               <a href="{{ path('question_show', {'id': question.id}) }}"> <h5>{{ question.title }}</h5> </a>
+                    <li> <div class="container answer {{cycle(['answers-odd', 'answers-even'], loop.index0)}}">
+               <a href="{{ path('question_show', {'id': question.id}) }}"> <h5>{{ question.title }}</h5> </a> par {{question.author.username}}
                 <p>{{ question.body }}</p>
+                </div>
                     </li>
               
+                   {% if app.user == question.author or is_granted('ROLE_ADMIN') %}
                    
                     <a href="{{ path('question_edit', {'id': question.id}) }}">edit</a>
-             
+                {% endif %}
         {% else %}
            
                <p>no records found </p> 
@@ -26,6 +28,6 @@
          </ol>  
       </div>
 
-    <a href="{{ path('question_new') }}">Create new</a>
+    
     </div>
 {% endblock %}
