@@ -45,13 +45,13 @@
           
         {% if app.user == question.author %} {# On affiche le formulaire uniquement si l'utilisateur est l'auteur de la question#}
           
-        <form action="/backend/answer/{{answer.id}}/preferred" method="post">
+        <form action="/backend/answer/{{answer.id}}/preferred" method="post" >
         <button type="submit">Valider cette réponse</button>
         </form>
         {% endif %}
         {% if is_granted('ROLE_MODERATOR') %}
         <form action="/backend/answer/{{answer.id}}/unallowed" method="post">
-        <button type="submit" class= "btn btn-dark float-right">Bloquer</button>
+        <button type="submit" class= "btn btn-dark mt-1">Bloquer</button>
         </form>
         {% endif %}
    
@@ -65,7 +65,7 @@
     <h4>Saisissez votre réponse</h4>
 
 
-   <form action="/backend/answer/new/{{question.id}}" method="post">
+   <form action="/backend/answer/new/{{question.id}}" method="post" class="form-container">
    
    <input type="textarea" name="a-body" class="answer-body">
     <button type="submit" class="answer-submit"> Valider</button>

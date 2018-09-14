@@ -108,7 +108,7 @@ class AnswerController extends Controller
      }
 
      /**
-     * @Route("/{id}/unallowed", name="answer_preferred", methods="POST")
+     * @Route("/{id}/unallowed", name="answer_unallowed", methods="POST")
      */
     //fonction pour modérer les réponses
     public function unallow(Answer $answer) {

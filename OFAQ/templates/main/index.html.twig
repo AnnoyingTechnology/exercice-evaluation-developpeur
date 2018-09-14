@@ -35,8 +35,8 @@
                     {% endif %}
 
                     {% if is_granted('ROLE_MODERATOR') %}
-                    <form action="/backend/question/{{question.id}}/unallowed" method="post">
-                    <button type="submit" class= "btn btn-dark float-right">Bloquer</button>
+                    <form action="/backend/question/{{question.id}}/unallowed" method="post" class="mt-2">
+                    <button type="submit" class= "btn btn-dark m-auto ">Bloquer</button>
                     </form>
                     {% endif %}
                 </div>

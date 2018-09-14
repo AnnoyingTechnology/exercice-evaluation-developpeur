@@ -63,22 +63,22 @@ class UserController extends Controller
     {
         $this->denyAccessUnlessGranted('ROLE_USER', null,  'Impossible d\'accéder à cette  page!');
 
-       /* // On stocke le mot de passe courant (celui en base)
+        // On stocke le mot de passe courant (celui en base)
         $currentPassword = $user->getPassword();
         // Et on le passe à vide...
-        $user->setPassword('');*/
+        $user->setPassword('');
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
              // On compare le nouveau (form) et l'ancien (current)
-             /*if(empty($user->getPassword())) {
+             if(empty($user->getPassword())) {
                 // On remets l'ancien
                 $user->setPassword($currentPassword);
-                } else {*/
+                } else {
                 $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
-                   // }
+                }
 
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'compte utilisateur modifié!');

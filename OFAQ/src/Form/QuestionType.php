@@ -12,8 +12,12 @@ class QuestionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('body')
+            ->add('title',null,[
+                'label' => 'Titre'
+            ])
+            ->add('body',null,[
+                'label'=> 'Question détaillée'
+            ])
             
             ->add('tags')
         ;
