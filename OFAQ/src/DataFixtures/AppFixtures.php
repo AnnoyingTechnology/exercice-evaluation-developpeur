@@ -72,7 +72,7 @@ class AppFixtures extends Fixture
         $manager->persist($userModo);
 
         //On utilise le populator pour  créer des utilisateurs (au statut de membre ), des questions, des tags, des réponses.
-        $populator->addEntity('App\Entity\User', 5, [
+        $populator->addEntity('App\Entity\User', 10, [
             'username' => function() use ($generator) { return $generator->unique()->firstName();},
         ], [function($user)  { $user->setEmail($user->getUserName().'@ofaq.com'); },
             function($user) { $user->setPassword($this->encoder->encodePassword($user, 'user'));
@@ -80,14 +80,14 @@ class AppFixtures extends Fixture
              function($user) { $user->setRole($this->roleUser) ;},
         ]);
 
-        $populator->addEntity('App\Entity\Question', 8, [
+        $populator->addEntity('App\Entity\Question', 11, [
             'title' => function() use ($generator) { return $generator->unique()->words($nb = 3, $asText = true) ; },
             'body' => function() use ($generator) { return $generator->paragraph($nbSentences = 3, $variableNbSentences = true); },
             'createdAt' => function() use ($generator) { return $generator->dateTime($max = 'now', $timezone = null);},
            // 'author' =>function() use ($generator) { return $generator->numberBetween($min = 1, $max = 3);},
         ]);
 
-        $populator->addEntity('App\Entity\Answer', 15, [
+        $populator->addEntity('App\Entity\Answer', 25, [
             'body'=> function() use ($generator) { return $generator->realText($maxNbChars = 200, $indexSize = 2) ;},
             'createdAt' => function() use ($generator) { return $generator->dateTime($max = 'now', $timezone = null);},
         ]);

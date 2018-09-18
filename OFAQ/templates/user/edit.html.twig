@@ -13,8 +13,9 @@
         </div>
         {% endfor %}
     {% endfor %}
+    <div class="form-container">
     {{ include('user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
+    </div>
 {% else %}
       <div class="alert alert-danger" role="alert">
   Vous ne pouvez pas accéder à cette page! 

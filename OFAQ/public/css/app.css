@@ -1,12 +1,12 @@
 body {
     font-family: 'Lato', sans-serif;
-    background-color: #0ac3a7;
+    background-color: #4dd0e1;
 }
 
 header {
     text-align: center;
     color: #fffdd8;
-    background-color: #0bad93;
+    background-color: #009faf;
     padding-top: 1rem;
 }
 header h1 {
@@ -60,7 +60,7 @@ header nav a {
 
 .questions{
     border: 2px solid olivedrab;
-    background-color: #3d6a7b;
+    background-color: #009faf;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -80,31 +80,36 @@ header nav a {
 }
 
 .answers-odd {
-    background-color: #87ded0;
+    background-color: #88ffff;;
 }
 
 .answers-even {
-    background-color: #5fa3cc;
+    background-color: #4dd0e1;
 }
 
 .preferred {
     border: 3px solid rebeccapurple;
     background-color: #e4d393eb;
 }
+.tags {
+    margin-bottom: 1rem;
+}
 
 .answer-body {
     width: 25rem;
     height: 5rem;
 }
-/*.answer-submit {
-    position: relative;
-    top: 1.5rem;
-}*/
+.answer-submit {
+    margin-top: 1rem;
+}
 
 footer {
     text-align: center;
+    background-color: #88ffff;
 }
 
-form {
-    display: inline-flex;
+.form-container {
+   margin: auto;
+   width: 50%;
+   padding-top: 1rem;
 }
