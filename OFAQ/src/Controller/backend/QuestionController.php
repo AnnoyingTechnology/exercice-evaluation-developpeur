@@ -77,7 +77,7 @@ class QuestionController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('question_index');
+        return $this->redirectToRoute('home');
     }
     /**
      * @Route("/{id}/unallowed", name="question_unallowed", methods="POST")

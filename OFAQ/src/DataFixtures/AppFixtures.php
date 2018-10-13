@@ -46,11 +46,11 @@ class AppFixtures extends Fixture
         $roleModo->setLabel('Modérateur');
         
         //On créé les 3 utilisateurs avec leur rôle
-        $userAdmin = new User();
-        $userAdmin->setUsername('admin');
-        $userAdmin->setEmail('admin@ofaq.com');
-        $userAdmin->setPassword($this->encoder->encodePassword($userAdmin, 'admin'));
-        $userAdmin->setRole($roleAdmin);
+        // $userAdmin = new User();
+        // $userAdmin->setUsername('admin');
+        // $userAdmin->setEmail('admin@ofaq.com');
+        // $userAdmin->setPassword($this->encoder->encodePassword($userAdmin, 'admin'));
+        // $userAdmin->setRole($roleAdmin);
 
        /* $userUser = new User();
         $userUser->setUserName('user');
@@ -64,10 +64,10 @@ class AppFixtures extends Fixture
         $userModo->setPassword($this->encoder->encodePassword($userModo, 'modo'));
         $userModo->setRole($roleModo);
 
-        $manager->persist($roleAdmin);
+        //$manager->persist($roleAdmin);
         //$manager->persist($roleUser);
         $manager->persist($roleModo);
-        $manager->persist($userAdmin);
+       // $manager->persist($userAdmin);
         //$manager->persist($userUser);
         $manager->persist($userModo);
 

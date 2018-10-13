@@ -34,6 +34,7 @@ class Question
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Answer", mappedBy= "question" )
+     * @ORM\JoinColumn(nullable=true, onDelete= "cascade")
      */
     private $answers;
 

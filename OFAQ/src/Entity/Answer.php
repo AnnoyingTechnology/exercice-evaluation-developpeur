@@ -23,13 +23,13 @@ class Answer
     private $body;
 /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Question", inversedBy="answers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      */
     private $question;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="answers")
-     * @ORM\JoinColumn(nullable=true, onDelete= "cascade")
+     * @ORM\JoinColumn(nullable=true, onDelete="cascade")
      */
     private $author;
 
