@@ -39,7 +39,7 @@ class Question
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="questions",cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete= "cascade")
      */
     private $author;
 
