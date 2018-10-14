@@ -25,11 +25,14 @@
                 {# User connecté #}
               <div id= "bonjour"> Bonjour,   <span class="badge badge-primary "> {{ app.user.username }}</span>
                         {% if is_granted('ROLE_ADMIN') %}
-                 <a href="{{path('admin_home')}}" class="badge badge-danger"> Page Administrateur </a>
+                    <a href="{{path('admin_home')}}" class="badge badge-danger"> Page Administrateur </a>
+                </div>
+                
+                <a class="nav-item nav-link" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"> Déconnexion</i></a>
                          {% else %}
                    <span class="badge badge-danger"> {{ app.user.role.label }}</span> 
                        
-                </div>
+              
                
                  <a class="nav-item nav-link" href="{{ path('user_show', {'id': app.user.id}) }}"><i class="fas fa-user-circle"> Mon profil</i></a>
                 <a class="nav-item nav-link" href="{{ path('logout') }}"><i class="fas fa-sign-out-alt"> Déconnexion</i></a>
