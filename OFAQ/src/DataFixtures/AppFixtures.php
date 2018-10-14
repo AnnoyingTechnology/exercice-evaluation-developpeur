@@ -80,14 +80,14 @@ class AppFixtures extends Fixture
              function($user) { $user->setRole($this->roleUser) ;},
         ]);
 
-        $populator->addEntity('App\Entity\Question', 30, [
+        $populator->addEntity('App\Entity\Question', 11, [
             'title' => function() use ($generator) { return $generator->unique()->words($nb = 3, $asText = true) ; },
             'body' => function() use ($generator) { return $generator->paragraph($nbSentences = 3, $variableNbSentences = true); },
             'createdAt' => function() use ($generator) { return $generator->dateTime($max = 'now', $timezone = null);},
            // 'author' =>function() use ($generator) { return $generator->numberBetween($min = 1, $max = 3);},
         ]);
 
-        $populator->addEntity('App\Entity\Answer', 40, [
+        $populator->addEntity('App\Entity\Answer', 25, [
             'body'=> function() use ($generator) { return $generator->realText($maxNbChars = 200, $indexSize = 2) ;},
             'createdAt' => function() use ($generator) { return $generator->dateTime($max = 'now', $timezone = null);},
         ]);

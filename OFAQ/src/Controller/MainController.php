@@ -16,19 +16,13 @@ class MainController extends Controller
     /**
      * @Route("/", name="home", methods="GET")
      */
-    public function home(QuestionRepository $questionRepository, Request $request)
+    public function home(QuestionRepository $questionRepository)
    
     {
         $questions = $questionRepository->sortQuestionsByDate();
-        $paginator = $this->get('knp_paginator');
-        $result = $paginator->paginate(
-            $questions,                                /* Query */
-            $request->query->getInt('page', 1),     /* page number */
-            $request->query->getInt('limit', 7)     /* limit per page */
-        );
 
         return $this->render('main/index.html.twig', [
-            'questions' => $result,
+            'questions' => $questions,
         ]);
     }
      /**

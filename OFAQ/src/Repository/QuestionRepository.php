@@ -6,7 +6,6 @@ use App\Entity\Question;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Question|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,16 +22,14 @@ class QuestionRepository extends ServiceEntityRepository
 
     // On crée une requête  pour récupérer les questions autorisées et triées par date (les plus récentes d'abord) 
     public function sortQuestionsByDate(){
-       return $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery('
                 SELECT q 
                 FROM App\Entity\Question q 
                 WHERE q.isAllowed = true
                 ORDER BY q.createdAt DESC
             ')
-            
-             ->getResult();
-           // return new Paginator($query);
+            ->getResult();
     }
 
     /*public function getQuestionsByUser(User $user){
