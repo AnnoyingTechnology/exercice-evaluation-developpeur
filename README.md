@@ -16,7 +16,7 @@ Développer un site de questions/réponses sur le modèle de [Quora](https://www
 3. Tout peut être fait à l'aide des composants de Symfony que vous avez déjà vus en cours (ou presque :grimacing:).
 4. Pensez à l'ergonomie :nerd_face: => Flash messages, navigation spécifique le cas échéant.
 5. N'oubliez pas de **fournir un export de votre base de données** (les données seules) OU **fournir des Fixtures** (mieux, mais pas prioritaire). **S'il y'a des users/mots de passe indiquez-les dans un README à l'intention du correcteur.**
-6. **Utilisez Trello pour organiser vos tâches !** Vous y verrez plus clair, _vraiment_.
+6. **Utilisez les issues github pour organiser vos tâches !** Vous y verrez plus clair, _vraiment_.
 
 ## Structure du site
 
@@ -80,5 +80,3 @@ Bon courage :slightly_smiling_face: :muscle: et n'oubliez pas d'écrire une peti
 Tout schéma ou document (même scanné !) ayant servi à créer l'appli sera le bienvenu dans le repo final !
 
 Merci.
-
-Et _Think Trello :wink:_
